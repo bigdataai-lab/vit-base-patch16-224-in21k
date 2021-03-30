@@ -16,6 +16,8 @@ The Vision Transformer (ViT) is a transformer encoder model (BERT-like) pretrain
 
 Images are presented to the model as a sequence of fixed-size patches (resolution 16x16), which are linearly embedded. One also adds a [CLS] token to the beginning of a sequence to use it for classification tasks. One also adds absolute position embeddings before feeding the sequence to the layers of the Transformer encoder.
 
+Note that this model does not provide any fine-tuned heads, as these were zero'd by Google researchers. However, the model does include the pre-trained pooler, which can be used for downstream tasks (i.e. such as image classification).
+
 By pre-training the model, it learns an inner representation of images that can then be used to extract features useful for downstream tasks: if you have a dataset of labeled images for instance, you can train a standard classifier by placing a linear layer on top of the pre-trained encoder. One typically places a linear layer on top of the [CLS] token, as the last hidden state of this token can be seen as a representation of an entire image.
 
 ## Intended uses & limitations
@@ -28,18 +30,16 @@ fine-tuned versions on a task that interests you.
 Here is how to use this model to classify an image of the COCO 2017 dataset into one of the 21k ImageNet-21k classes:
 
 ```python
-from transformers import ViTFeatureExtractor, ViTForImageClassification
+from transformers import ViTFeatureExtractor, ViTModel
 from PIL import Image
 import requests
 url = 'http://images.cocodataset.org/val2017/000000039769.jpg'
 image = Image.open(requests.get(url, stream=True).raw)
 feature_extractor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224-in21k')
-model = ViTForImageClassification.from_pretrained('google/vit-base-patch16-224-in21k')
-inputs = feature_extractor(images=image)
+model = ViTModel.from_pretrained('google/vit-base-patch16-224-in21k')
+inputs = feature_extractor(images=image, return_tensors="pt")
 outputs = model(**inputs)
-logits = outputs.logits
-# model predicts one of the 21k ImageNet-21k classes
-predicted_class = logits.argmax(-1).item()
+last_hidden_states = outputs.last_hidden_state
 ```
 
 Currently, both the feature extractor and model  support PyTorch. Tensorflow and JAX/FLAX are coming soon, and the API of ViTFeatureExtractor might change.
