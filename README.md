@@ -27,7 +27,7 @@ fine-tuned versions on a task that interests you.
 
 ### How to use
 
-Here is how to use this model to classify an image of the COCO 2017 dataset into one of the 21k ImageNet-21k classes:
+Here is how to use this model:
 
 ```python
 from transformers import ViTFeatureExtractor, ViTModel
