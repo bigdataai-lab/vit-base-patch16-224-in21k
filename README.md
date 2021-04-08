@@ -1,10 +1,13 @@
 ---
 license: apache-2.0
+tags:
+- image-classification
+- timm
 datasets:
 - imagenet-21k
 ---
 
-# Vision Transformer base model 
+# Vision Transformer (base-sized model) 
 
 Vision Transformer (ViT) model pre-trained on ImageNet-21k (14 million images, 21,843 classes) at resolution 224x224. It was introduced in the paper [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929) by Dosovitskiy et al. and first released in [this repository](https://github.com/google-research/vision_transformer). However, the weights were converted from the [timm repository](https://github.com/rwightman/pytorch-image-models) by Ross Wightman, who already converted the weights from JAX to PyTorch. Credits go to him. 
 
