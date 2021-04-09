@@ -2,7 +2,6 @@
 license: apache-2.0
 tags:
 - image-classification
-- timm
 datasets:
 - imagenet-21k
 ---
