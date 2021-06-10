@@ -15,5 +15,5 @@
   "num_channels": 3,
   "num_hidden_layers": 12,
   "patch_size": 16,
-  "transformers_version": "4.5.0.dev0"
+  "transformers_version": "4.7.0.dev0"
 }
