@@ -57,7 +57,7 @@ url = 'http://images.cocodataset.org/val2017/000000039769.jpg'
 image = Image.open(requests.get(url, stream=True).raw)
 
 feature_extractor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224-in21k')
-model = ViTModel.from_pretrained('google/vit-base-patch16-224-in21k')
+model = FlaxViTModel.from_pretrained('google/vit-base-patch16-224-in21k')
 
 inputs = feature_extractor(images=image, return_tensors="np")
 outputs = model(**inputs)
