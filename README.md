@@ -28,22 +28,41 @@ fine-tuned versions on a task that interests you.
 
 ### How to use
 
-Here is how to use this model:
+Here is how to use this model in PyTorch:
 
 ```python
 from transformers import ViTFeatureExtractor, ViTModel
 from PIL import Image
 import requests
+
 url = 'http://images.cocodataset.org/val2017/000000039769.jpg'
 image = Image.open(requests.get(url, stream=True).raw)
+
 feature_extractor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224-in21k')
 model = ViTModel.from_pretrained('google/vit-base-patch16-224-in21k')
 inputs = feature_extractor(images=image, return_tensors="pt")
+
 outputs = model(**inputs)
 last_hidden_states = outputs.last_hidden_state
 ```
 
-Currently, both the feature extractor and model  support PyTorch. Tensorflow and JAX/FLAX are coming soon, and the API of ViTFeatureExtractor might change.
+Here is how to use this model in JAX/Flax:
+
+```python
+from transformers import ViTFeatureExtractor, FlaxViTModel
+from PIL import Image
+import requests
+
+url = 'http://images.cocodataset.org/val2017/000000039769.jpg'
+image = Image.open(requests.get(url, stream=True).raw)
+
+feature_extractor = ViTFeatureExtractor.from_pretrained('google/vit-base-patch16-224-in21k')
+model = ViTModel.from_pretrained('google/vit-base-patch16-224-in21k')
+
+inputs = feature_extractor(images=image, return_tensors="np")
+outputs = model(**inputs)
+last_hidden_states = outputs.last_hidden_state
+```
 
 ## Training data
 
