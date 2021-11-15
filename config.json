@@ -1,4 +1,5 @@
 {
+  "_name_or_path": "google/vit-base-patch16-224-in21k",
   "architectures": [
     "ViTModel"
   ],
@@ -15,5 +16,6 @@
   "num_channels": 3,
   "num_hidden_layers": 12,
   "patch_size": 16,
-  "transformers_version": "4.7.0.dev0"
+  "qkv_bias": true,
+  "transformers_version": "4.13.0.dev0"
 }
