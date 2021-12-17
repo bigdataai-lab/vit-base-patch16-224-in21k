@@ -3,6 +3,7 @@ license: apache-2.0
 tags:
 datasets:
 - imagenet-21k
+inference: false
 ---
 
 # Vision Transformer (base-sized model) 
